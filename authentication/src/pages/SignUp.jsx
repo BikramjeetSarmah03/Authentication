@@ -1,5 +1,5 @@
-import React,{useState} from "react";
-import { Link, useNavigate } from 'react-router-dom';
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 // import axios from "axios";
 export default function SignUp() {
   const [formData, setFormData] = useState({});
@@ -15,10 +15,10 @@ export default function SignUp() {
     try {
       setLoading(true);
       setError(false);
-      const res = await fetch('http://localhost:8080/api/auth/signup', {
-        method: 'POST',
+      const res = await fetch("http://localhost:8080/api/auth/signup", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(formData),
       });
@@ -29,7 +29,7 @@ export default function SignUp() {
         setError(true);
         return;
       }
-      navigate('/sign-in');
+      navigate("/signin");
     } catch (error) {
       setLoading(false);
       setError(true);
@@ -42,31 +42,40 @@ export default function SignUp() {
         <input
           type="text"
           placeholder="username"
-          id="Username"
+          id="username"
           className="bg-slate-300 p-3 rounded-lg "
-       onChange={handleChange} />
+          onChange={handleChange}
+        />
         <input
           type="text"
           placeholder="email"
-          id="Email"
+          id="email"
           className="bg-slate-300 p-3 rounded-lg "
-          onChange={handleChange}/>
+          onChange={handleChange}
+        />
         <input
           type="text"
           placeholder="password"
-          id="Password"
+          id="password"
           className="bg-slate-300 p-3 rounded-lg "
-          onChange={handleChange} />
-        <button className="bg-slate-700 text-white p-3 rounded-md shadow-sm uppercase hover:opacity-90 disabled:opacity-75">
-          Sign up
+          onChange={handleChange}
+        />
+        <button
+          disabled={loading}
+          className='bg-slate-700 text-white p-3 rounded-lg uppercase hover:opacity-95 disabled:opacity-80'
+        >
+          {loading ? 'Loading...' : 'Sign Up'}
         </button>
       </form>
       <div className="flex gap-2 mt-5 ">
         <p> Have an account?</p>
-        <Link to="/sign-in">
+        <Link to="/signin">
           <span className="text-blue-500">Sign in</span>
         </Link>
       </div>
+      <p className="text-red-700">
+        {error ? error.message || "Something went wrong,please try again!": ''}
+      </p>
     </div>
   );
-};
+}
