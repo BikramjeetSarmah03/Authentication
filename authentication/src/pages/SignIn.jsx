@@ -7,6 +7,8 @@ import {
   signInSuccess,
 } from "../redux/user/userSlice";
 import { useDispatch, useSelector } from "react-redux";
+import Auth from "../components/Auth";
+
 
 export default function SignIn() {
   const [formData, setFormData] = useState({});
@@ -23,7 +25,7 @@ export default function SignIn() {
     e.preventDefault();
     try {
       dispatch(signInStart());
-      const res = await fetch("http://localhost:8080/api/auth/signin", {
+      const res = await fetch("/api/auth/signin", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -65,10 +67,11 @@ export default function SignIn() {
         >
           {loading ? "Loading..." : "Sign In"}
         </button>
+        <Auth/>
       </form>
       <div className="flex gap-2 mt-5 ">
         <p>Don't have an account?</p>
-        <Link to="/sign-up">
+        <Link to="/signup">
           <span className="text-blue-500">Sign up</span>
         </Link>
       </div>

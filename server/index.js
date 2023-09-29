@@ -4,11 +4,12 @@ import dotenv from 'dotenv';
 import cors from 'cors';
 import userRoute from './routes/user.route.js';
 import authRoute from './routes/auth.route.js';
-
+import cookieParser from 'cookie-parser';
 dotenv.config();
 
 const app=express();
 app.use(express.json());
+app.use(cookieParser());
 
 const corsOptions = {
   origin: 'http://localhost:5173', // Replace with your frontend URL
@@ -21,7 +22,7 @@ mongoose
     useUnifiedTopology: true,
   })
   .then(() => {
-    console.log("> DB connection successful ... ");
+    console.log(" DB connection successful ... ");
   });
 
 
