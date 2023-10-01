@@ -11,15 +11,16 @@ function App() {
   return (
     <>
       <BrowserRouter>
-      {/* Header */}
-      <Header/>
+        {/* Header */}
+        <Header />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/signin" element={<SignIn />} />
           <Route path="/signup" element={<SignUp />} />
-          <Route element={<PrivateRoute/>}></Route>
-          <Route path="/profile" element={<Profile />} />
+          <Route element={<PrivateRoute />}>
+            <Route path="/profile" element={<Profile />} />
+          </Route>
         </Routes>
       </BrowserRouter>
     </>
